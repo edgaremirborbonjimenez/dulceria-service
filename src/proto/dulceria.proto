@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package dulceria;
+
+service DulceriaService{
+    rpc CreateNewItem(CreateItem) returns (Item) {}
+    rpc RemoveItem(ItemById) returns (Item){}
+    rpc AddItemStock(ItemStockList) returns (ItemStockList){}
+    rpc TakeItemStock(ItemStockList) returns (ItemStockList){}
+    rpc UpdateItem(Item) returns (Item){}
+    rpc GetAllItems(Empty) returns (ItemsList){}
+    rpc GetItemById(ItemById) returns (Item){}
+}
+
+message Empty{
+
+}
+
+message ItemById{
+    string id = 1;
+}
+
+message ItemsList{
+    repeated Item itemsList = 1;
+}
+
+message ItemStockList{
+    repeated ItemStock itemsList = 1;
+}
+
+message ItemStock{
+    string id = 1;
+    int32 amount = 2;
+}
+
+message CreateItem{
+    string name = 1;
+    double price = 2;
+    Size size = 3;
+}
+
+message Item{
+    string id = 1;
+    string name = 2;
+    double price = 3;
+    Size size = 4;
+}
+
+enum Size{
+    S = 0;
+    R = 1;
+    L = 2;
+    NA = 3;
+}
